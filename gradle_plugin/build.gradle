@@ -1,0 +1,57 @@
+plugins {
+    id 'java'
+    id 'java-gradle-plugin'
+    id 'maven-publish'
+}
+
+group = 'com.deepblue'
+version = '0.0.1'
+
+gradlePlugin {
+    plugins {
+        myApkTool  {
+            id = "deepblue-plugin-apktool"
+            implementationClass  = 'ApkToolPlugin'
+        }
+        myAsmLog  {
+            id = "deepblue-plugin-asmlog"
+            implementationClass  = 'AsmLogPlugin'
+        }
+
+        myThreadMgLog  {
+            id = "deepblue-plugin-threadmg"
+            implementationClass  = 'ThreadMgPlugin'
+        }
+    }
+
+}
+
+dependencies {
+    /*
+    这里版本似乎配的没用，要在gradle-wrapper.properties里面的
+    distributionUrl=https\://downloads.gradle-dn.com/distributions/gradle-7.6-bin.zip
+    里面配置才行
+     */
+    implementation 'com.android.tools.build:gradle:7.1.3'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.1'
+
+//    implementation 'org.ow2.asm:asm:7.2'
+    implementation 'org.ow2.asm:asm-commons:7.2'
+
+//    implementation 'com.aliyun.dpa:oss-android-sdk:2.9.13'
+//    implementation gradleApi()
+//    implementation localGroovy()
+//    implementation 'com.android.tools.build:gradle-api:7.3.0'
+//    implementation 'com.android.tools.build:gradle:7.3.0'
+}
+
+
+publishing {
+    repositories {
+        maven {
+            name = 'localRepo'
+            url = '../localRepo/'
+        }
+    }
+}
+
